@@ -10,7 +10,9 @@ type MainLayoutProps = {
 }
 
 const MainLayoutWrapper = styled.main`
-    padding: ${({theme}) => theme.sizes.toRem(8)};
+    section {
+        padding: ${({theme}) => theme.sizes.toRem(10)};
+    }
 `
 
 function MainLayout({ children, title }: MainLayoutProps) {
@@ -18,7 +20,7 @@ function MainLayout({ children, title }: MainLayoutProps) {
         <MainLayoutWrapper> 
             <AppBar title={title} />
             <SideMenu />
-            {children} 
+            <section>{children}</section>
         </MainLayoutWrapper>
     )
 }
