@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, ElementType } from 'react';
 import styled, { css } from 'styled-components';
 
 type GridProps = {
@@ -11,6 +11,7 @@ type GridProps = {
     alignself?: string
     direction?: string
     wrap?: string
+    as?: ElementType
 }
 
 const GridWrapper = styled.div<GridProps>`
