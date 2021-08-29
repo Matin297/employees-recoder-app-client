@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { ThemeProvider } from "styled-components";
+import PageTitleProvider from "contexts/page-title-context";
 import theme from "./theme";
 import GlobalStyles from './globalStyles';
 
@@ -11,7 +12,9 @@ function Providers({ children }: ProvidersProps) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      {children}
+      <PageTitleProvider>
+        {children}
+      </PageTitleProvider>
     </ThemeProvider>
   )
 }
