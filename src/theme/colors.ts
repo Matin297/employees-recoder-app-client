@@ -1,4 +1,8 @@
 const colors = {
+  default: {
+    500: "#87848b",
+    700: "#343036",
+  },
   primary: {
     500: "#f7fd04",
     600: "#f9b208",
@@ -7,7 +11,7 @@ const colors = {
   },
   secondry: {
     500: "#81b214",
-    800: "#206a5d",
+    700: "#206a5d",
   },
   success: {
     100: "#a2f0bc",
