@@ -1,7 +1,4 @@
-import { FC } from "react";
-import { RouteComponentProps } from "react-router-dom";
 import EmployeesPage from "pages/employees/employees";
-import EmployeePage from "pages/employee/employee";
 import CreateEmployeePage from "pages/create-employee/create-employee";
 import EditEmployeePage from "pages/edit-employee/edit-employee";
 
@@ -14,7 +11,7 @@ export const Layout: LayoutType = {
 };
 
 type Route = {
-  component: FC<RouteComponentProps>;
+  component: any;
   path: string;
   exact?: boolean;
   title?: string;
@@ -33,12 +30,6 @@ const routes: Route[] = [
     component: CreateEmployeePage,
     path: "/create-employee",
     title: "Create New Employees",
-    layout: Layout.DASHBOARD,
-  },
-  {
-    component: EmployeePage,
-    path: "/:id",
-    exact: true,
     layout: Layout.DASHBOARD,
   },
   {

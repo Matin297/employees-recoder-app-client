@@ -12,6 +12,7 @@ type GridProps = {
     direction?: string
     wrap?: string
     as?: ElementType
+    onSubmit?: (e: Event) => void
 }
 
 const GridWrapper = styled.div<GridProps>`

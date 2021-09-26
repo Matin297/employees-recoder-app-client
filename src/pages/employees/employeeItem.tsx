@@ -1,18 +1,13 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { EmployeeType } from 'types/employee-types'
+
 import Grid from 'components/Grid';
 import Button from 'components/Button';
 import Typography from 'components/Typography';
 import TrashIcon from 'components/Icons/Trash';
 import EyeIcon from 'components/Icons/Eye';
-
-type EmployeeType = {
-    first_name: string
-    last_name: string
-    _id: string
-    role: string
-}
 
 function employeeToString({ first_name, last_name }: EmployeeType) {
     return `${first_name} ${last_name}`;

@@ -1,10 +1,9 @@
-import { ReactNode } from "react";
+import React from "react";
 import styled, { css } from 'styled-components';
 
-type ButtonProps = {
-    children: ReactNode
-    variant: "outlined" | "text" | "filled"
-    color: "default" | "primary" | "secondry"
+interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+    variant: "outlined" | "text" | "filled";
+    color: "default" | "primary" | "secondry";
 }
 
 const CustomButton = styled.button<ButtonProps>`
