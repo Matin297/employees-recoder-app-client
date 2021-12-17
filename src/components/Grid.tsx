@@ -2,17 +2,17 @@ import { ReactNode, ElementType } from 'react';
 import styled, { css } from 'styled-components';
 
 type GridProps = {
-    children: ReactNode
-    gap: number
-    container?: boolean
-    item?: boolean
-    justify?: "space-between" | string
-    align?: string
-    alignself?: string
-    direction?: string
-    wrap?: string
-    as?: ElementType
-    onSubmit?: (e: Event) => void
+    children: ReactNode;
+    gap: number;
+    container?: boolean;
+    item?: boolean;
+    justify?: "space-between" | string;
+    align?: string;
+    alignself?: string;
+    direction?: string;
+    wrap?: string;
+    as?: ElementType;
+    onSubmit?: (e: Event) => void;
 }
 
 const GridWrapper = styled.div<GridProps>`

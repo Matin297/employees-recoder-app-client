@@ -25,17 +25,16 @@ function EditEmployeePage({ match, history }: RouteComponentProps<{id: string}>)
     })
 
     // TODO -> Send a request in order to update the employee info
-    
     useEffect(() => {
         axios
-        .get(`${API_CONFIG.record.path}/${match.params.id}`)
-        .then(res => {
-            if (res.status === 200) {
-                setTitle(res.data.first_name);
-                setEmployee(res.data)
-            }
-        })
-        .catch(err => alert(err))
+            .get(`${API_CONFIG.record.path}/${match.params.id}`)
+            .then(res => {
+                if (res.status === 200) {
+                    setTitle(res.data.first_name);
+                    setEmployee(res.data)
+                }
+            })
+            .catch(err => alert(err))
     }, [setTitle, match])
 
     function onSubmitEditHandler(e: Event) {

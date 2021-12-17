@@ -46,32 +46,32 @@ function HomePage({ history }: RouteComponentProps) {
         }))
 
         axios
-        .get(`${API_CONFIG.record.path}`)
-        .then(res => {
-            setEmployees(state => ({
-                ...state,
-                isLoading: false
-            }))
+            .get(`${API_CONFIG.record.path}`)
+            .then(res => {
+                setEmployees(state => ({
+                    ...state,
+                    isLoading: false
+                }))
 
-            if (res.status === 200) {
+                if (res.status === 200) {
+                    setEmployees(state => ({
+                        ...state,
+                        data: res.data
+                    }))
+                } else {
+                    setEmployees(state => ({
+                        ...state,
+                        error: res.data.error
+                    }))
+                }
+            })
+            .catch(error => {
                 setEmployees(state => ({
                     ...state,
-                    data: res.data
+                    error: `Opps, ${error.message}`,
+                    isLoading: false
                 }))
-            } else {
-                setEmployees(state => ({
-                    ...state,
-                    error: res.data.error
-                }))
-            }
-        })
-        .catch(error => {
-            setEmployees(state => ({
-                ...state,
-                error,
-                isLoading: false
-            }))
-        })
+            })
     }, [])
 
     if (employees.error)

@@ -1,7 +1,7 @@
-import React from "react";
+import { ComponentPropsWithRef } from "react";
 import styled, { css } from 'styled-components';
 
-interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ComponentPropsWithRef<"button"> {
     variant: "outlined" | "text" | "filled";
     color: "default" | "primary" | "secondry";
 }
