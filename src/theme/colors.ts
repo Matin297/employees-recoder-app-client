@@ -1,18 +1,4 @@
 const colors = {
-  default: {
-    500: "#87848b",
-    700: "#343036",
-  },
-  primary: {
-    500: "#f7fd04",
-    600: "#f9b208",
-    700: "#f98404",
-    800: "#fc5404",
-  },
-  secondry: {
-    500: "#81b214",
-    700: "#206a5d",
-  },
   success: {
     100: "#a2f0bc",
     500: "#12bd4b",
@@ -21,6 +7,8 @@ const colors = {
     100: "#f1acc9",
     500: "#ff3333",
   },
+  white: "#fff",
+  black: "#000",
   grey: {
     50: "#f4effa",
     100: "#dfdbe6",
@@ -33,8 +21,6 @@ const colors = {
     800: "#343036",
     900: "#221f23",
   },
-  white: "#fff",
-  black: "#000",
 };
 
 export default colors;

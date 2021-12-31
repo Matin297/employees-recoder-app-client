@@ -1,0 +1,44 @@
+{
+    "dark": {
+        "name": "dark",
+        "colors": {
+            "default": {
+                "500": "#f4effa",
+                "700": "#dfdbe6"
+              },
+            "background": "#071C21",
+            "button": "#153B44",
+            "primary": {
+                "500": "#636f21",
+                "600": "#8b9b2e",
+                "700": "#b2c83b",
+                "800": "#C6DE41"
+            },
+            "secondry": {
+                "500": "#2d6e7e",
+                "700": "#1b424c"
+            }
+        }
+    },
+    "light": {
+        "name": "light",
+        "colors": {
+            "default": {
+                "500": "#87848b",
+                "700": "#343036"
+            },
+            "background": "#dfdbe6",
+            "button": "#ffffff",
+            "primary": {
+                "500": "#f7fd04",
+                "600": "#f9b208",
+                "700": "#f98404",
+                "800": "#fc5404"
+            },
+            "secondry": {
+                "500": "#81b214",
+                "700": "#206a5d"
+            }
+        }
+    }
+}

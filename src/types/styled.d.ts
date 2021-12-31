@@ -2,11 +2,14 @@ import "styled-components";
 
 declare module "styled-components" {
   export interface DefaultTheme {
+    name: string;
     colors: {
       default: {
         "500": string;
         "700": string;
       };
+      background: string;
+      button: string;
       primary: {
         "500": string;
         "600": string;

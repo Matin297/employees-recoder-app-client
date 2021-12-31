@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
     body {
         margin: 0;
         padding: 0;
-        background-color: #dfdbe6;
+        background-color: ${({ theme }) => theme.colors.background};
         font-size: 1rem;
         font-family: 'Montserrat', sans-serif;
     }
@@ -30,10 +30,11 @@ const GlobalStyles = createGlobalStyle`
         align-items: center;
         transition: filter 200ms ease-in-out;
         padding: 10px;
+        font-weight: 600;
     }
 
     button:hover {
-        filter: brightness(130%);
+        filter: brightness(120%);
     }
 
     span {

@@ -1,9 +1,16 @@
 import colors from "./colors";
+import themes from "./themes.json";
 import sizes from "./sizes";
 import animation from "./animation";
 
+const lightTheme = themes.light;
+
 const theme = {
-  colors,
+  name: "light",
+  colors: {
+    ...colors,
+    ...lightTheme.colors,
+  },
   sizes,
   animation,
 };

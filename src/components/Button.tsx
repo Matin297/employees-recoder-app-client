@@ -18,7 +18,7 @@ const CustomButton = styled.button<ButtonProps>`
         variant === 'filled' &&
         css`
             background-color: ${theme.colors[color][700]};
-            color: ${theme.colors.white};
+            color: ${theme.colors.button};
         `
     }
     ${({theme, variant, color}) => 
