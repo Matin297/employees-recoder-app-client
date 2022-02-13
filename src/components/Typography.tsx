@@ -1,56 +1,49 @@
-import { ReactNode } from "react";
-import styled from 'styled-components';
+import {
+  ComponentPropsWithoutRef,
+  ElementType,
+  useMemo,
+  ReactNode,
+} from "react";
+import styled from "styled-components";
+
+const VARIANT_TO_COMPONENT_MAP = {
+  h1: "h1",
+  h2: "h2",
+  h3: "h3",
+  h4: "h4",
+  h5: "h5",
+  h6: "h6",
+  body1: "p",
+  body2: "span",
+};
 
 type TypographyProps = {
-    children: ReactNode
-    component?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span'
-    color: 'default' | 'primary' | 'secondry'
-    className?: string
-}
+  variant?: keyof typeof VARIANT_TO_COMPONENT_MAP;
+  component?: ElementType;
+  color?: "default" | "primary" | "secondry";
+  className?: string;
+  children: ReactNode;
+};
 
-const TYPOGRAPHY_MAP = {
-    'h1': styled.h1<TypographyProps>`
-        font-size: ${({theme}) => theme.sizes.toRem(40)};
-        color: ${({ color, theme }) => theme.colors[color][700]};
+function Typography({
+  variant = "body1",
+  component = "p",
+  color = "default",
+  children,
+  className,
+}: TypographyProps) {
+  const Component = useMemo(
+    () => styled(
+      component || (VARIANT_TO_COMPONENT_MAP[variant] as ElementType)
+    )<ComponentPropsWithoutRef<typeof component>>`
+      font-size: ${({ theme }) =>
+        theme.sizes.toRem(theme.sizes.typography[variant])};
+      color: ${({ theme }) => theme.colors[color][700]};
     `,
-    'h2': styled.h2<TypographyProps>`
-        font-size: ${({theme}) => theme.sizes.toRem(35)};
-        color: ${({ color, theme }) => theme.colors[color][700]};
-    `,
-    'h3': styled.h3<TypographyProps>`
-        font-size: ${({theme}) => theme.sizes.toRem(30)};
-        color: ${({ color, theme }) => theme.colors[color][700]};
-    `,
-    'h4': styled.h4<TypographyProps>`
-        font-size: ${({theme}) => theme.sizes.toRem(25)};
-        color: ${({ color, theme }) => theme.colors[color][700]};
-    `,
-    'h5': styled.h5<TypographyProps>`
-        font-size: ${({theme}) => theme.sizes.toRem(20)};
-        color: ${({ color, theme }) => theme.colors[color][700]};
-    `,
-    'h6': styled.h6<TypographyProps>`
-        font-size: ${({theme}) => theme.sizes.toRem(18)};
-        color: ${({ color, theme }) => theme.colors[color][700]};
-    `,
-    'p': styled.p<TypographyProps>`
-        font-size: ${({theme}) => theme.sizes.toRem(16)};
-        color: ${({ color, theme }) => theme.colors[color][700]};
-    `,
-    'span': styled.span<TypographyProps>`
-        font-size: ${({theme}) => theme.sizes.toRem(12)};
-        color: ${({ color, theme }) => theme.colors[color][700]};
-    `,
-}
+    [color, variant, component]
+  );
 
-function Typography({ component = 'p', color = 'default', children, className }: TypographyProps) {
-    const Component = TYPOGRAPHY_MAP[component];
-    return <Component className={className} color={color}>{children}</Component>
-}
-
-Typography.defaultProps = {
-    component: 'p', 
-    color: 'default'
+  return <Component className={className}>{children}</Component>;
 }
 
 export default Typography;

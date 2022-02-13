@@ -46,6 +46,16 @@ declare module "styled-components" {
     sizes: {
       remUnit: number;
       toRem: (px: number) => string;
+      typography: {
+        h1: number;
+        h2: number;
+        h3: number;
+        h4: number;
+        h5: number;
+        h6: number;
+        body1: number;
+        body2: number;
+      };
     };
     animation: {
       transition: number;
