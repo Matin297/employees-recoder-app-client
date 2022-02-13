@@ -33,7 +33,7 @@ const EmployeeItemWrapper = styled.li`
 function EmployeeItem({ employee }: { employee: EmployeeType }) {
     return (
         <EmployeeItemWrapper>
-            <Grid container justify="space-between" align="center">
+            <Grid container justifyContent="space-between" alignItems="center">
                 <div>
                     <Typography>{employeeToString(employee)}</Typography>
                     <Typography component="span">{employee.role}</Typography>

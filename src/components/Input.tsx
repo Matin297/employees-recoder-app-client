@@ -1,9 +1,9 @@
-import React from 'react';
+import { ComponentPropsWithoutRef } from 'react'
 import styled from 'styled-components';
 import Grid from './Grid';
 import Typography from './Typography';
 
-interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
+interface InputProps extends ComponentPropsWithoutRef<'input'> {
     label?: string
     error?: boolean;
     helperText?: string;
@@ -49,18 +49,14 @@ const HelperText = styled(Typography)<{ error?: boolean }>`
     color: ${({ theme, error }) => error ? theme.colors.error[500] : theme.colors.grey[700]};
 `
 
-function Input({ label, id, helperText, ...props }: InputProps) {
+function Input({ label, id, helperText, color = 'default', ...props }: InputProps) {
     return (
-        <CustomGrid container direction="column">
-            <CustomInput id={id} {...props} />
+        <CustomGrid container flexDirection="column">
+            <CustomInput id={id} color={color} {...props} />
             <label htmlFor={id}> <Typography>{label}</Typography> </label>
             {helperText && <HelperText error={props.error} component="span">{helperText}</HelperText>}
         </CustomGrid>
     )
-}
-
-Input.defaultProps = {
-    color: 'default'
 }
 
 export default Input;

@@ -1,51 +1,41 @@
-import { ReactNode, ElementType } from 'react';
+import { ReactNode, ElementType, CSSProperties, FormEventHandler } from 'react';
 import styled, { css } from 'styled-components';
 
-type GridProps = {
-    children: ReactNode;
-    gap: number;
-    container?: boolean;
-    item?: boolean;
-    justify?: "space-between" | string;
-    align?: string;
-    alignself?: string;
-    direction?: string;
-    wrap?: string;
-    as?: ElementType;
-    onSubmit?: (e: Event) => void;
+interface GridProps extends CSSProperties {
+    children: ReactNode
+    container?: boolean
+    item?: boolean
+    as?: ElementType<any>
+    onSubmit?: FormEventHandler
+    gap?: number
 }
 
 const GridWrapper = styled.div<GridProps>`
     ${
-        ({container, theme, gap, justify, align, direction, wrap}) =>
+        ({container, theme, gap, justifyContent, alignItems, flexDirection, flexWrap}) =>
             container &&
             css`
                 display: flex;
-                gap: ${theme.sizes.remUnit * gap}px;
-                justify-content: ${justify};
-                align-items: ${align};
-                flex-direction: ${direction};
-                flex-wrap: ${wrap};
+                gap: ${gap ? theme.sizes.remUnit * gap : 0}px;
+                justify-content: ${justifyContent};
+                align-items: ${alignItems};
+                flex-direction: ${flexDirection};
+                flex-wrap: ${flexWrap};
             `
     }
     ${
-        ({item, alignself}) =>
+        ({item, alignSelf}) =>
             item &&
             css`
-                align-self: ${alignself};
+                align-self: ${alignSelf};
             `
     }
 `
 
-function Grid({children, ...props}: GridProps) {
+function Grid({children, gap = 0.5, flexDirection = 'row', ...props}: GridProps) {
     return (
-        <GridWrapper {...props}>{children}</GridWrapper>
+        <GridWrapper gap={gap} flexDirection={flexDirection} {...props}>{children}</GridWrapper>
     )
-}
-
-Grid.defaultProps = {
-    gap: 0.5,
-    direction: 'row'
 }
 
 export default Grid;

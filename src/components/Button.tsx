@@ -29,15 +29,10 @@ const CustomButton = styled.button<ButtonProps>`
     }
 `
 
-function Button({ children, ...props }: ButtonProps) {
+function Button({ children, color = "default", variant = "text", ...props }: ButtonProps) {
     return (
-        <CustomButton {...props}>{children}</CustomButton>
+        <CustomButton color={color} variant={variant} {...props}>{children}</CustomButton>
     )
-}
-
-Button.defaultProps = {
-    color: "default",
-    variant: "text"
 }
 
 export default Button;

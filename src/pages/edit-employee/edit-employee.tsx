@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FormEvent } from 'react';
 import { RouteComponentProps } from "react-router-dom";
 import axios from 'axios';
 
@@ -37,14 +37,16 @@ function EditEmployeePage({ match, history }: RouteComponentProps<{id: string}>)
             .catch(err => alert(err))
     }, [setTitle, match])
 
-    function onSubmitEditHandler(e: Event) {
+    function onSubmitEditHandler(e: FormEvent) {
         e.preventDefault();
 
-        const { first_name, last_name, role } = (e.target! as HTMLFormElement).elements as HTMLFormControlsCollection & {
-            first_name: HTMLInputElement;
-            last_name: HTMLInputElement;
-            role: HTMLInputElement;
-        };
+        const target = e.target as typeof e.target & { 
+            first_name: { value: string }
+            last_name: { value: string }
+            role: { value: string }
+        }
+
+        const { first_name, last_name, role } = target
 
         axios
             .patch(`${API_CONFIG.record.path}/${match.params.id}`, {
@@ -64,7 +66,7 @@ function EditEmployeePage({ match, history }: RouteComponentProps<{id: string}>)
     }
 
     return (
-        <Grid container direction="column" as="form" gap={1} onSubmit={onSubmitEditHandler}>
+        <Grid container flexDirection="column" as="form" gap={1} onSubmit={onSubmitEditHandler}>
             <Input 
                 label="First Name" 
                 id="first_name" 

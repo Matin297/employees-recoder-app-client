@@ -81,9 +81,9 @@ function HomePage({ history }: RouteComponentProps) {
         <div>
             {
                 employees.isLoading ?
-                <CustomGrid container direction="column" gap={1.3}>
-                    {SKELETONS.map(skelet => (
-                        <Grid container justify="space-between" key={skelet}>
+                <CustomGrid container flexDirection="column" gap={1.3}>
+                    {SKELETONS.map(skeleton => (
+                        <Grid container justifyContent="space-between" key={skeleton}>
                             <RectangleSkeleton  width={200} height={43} />
                             <Grid container>
                                 <RectangleSkeleton width={42} height={42} />
