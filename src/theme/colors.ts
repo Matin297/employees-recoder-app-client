@@ -6,6 +6,7 @@ const colors = {
   error: {
     100: "#f1acc9",
     500: "#ff3333",
+    700: "#ff3333",
   },
   white: "#fff",
   black: "#000",

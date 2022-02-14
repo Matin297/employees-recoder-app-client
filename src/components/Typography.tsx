@@ -1,10 +1,5 @@
-import {
-  ComponentPropsWithoutRef,
-  ElementType,
-  useMemo,
-  ReactNode,
-} from "react";
-import styled from "styled-components";
+import { ComponentPropsWithoutRef, ElementType } from "react";
+import styled, { css } from "styled-components";
 
 const VARIANT_TO_COMPONENT_MAP = {
   h1: "h1",
@@ -17,33 +12,43 @@ const VARIANT_TO_COMPONENT_MAP = {
   body2: "span",
 };
 
-type TypographyProps = {
+interface TypographyProps extends ComponentPropsWithoutRef<ElementType<any>> {
   variant?: keyof typeof VARIANT_TO_COMPONENT_MAP;
   component?: ElementType;
-  color?: "default" | "primary" | "secondry";
-  className?: string;
-  children: ReactNode;
-};
+  color?: "default" | "primary" | "secondry" | "error";
+}
+
+const Component = styled.p<TypographyProps>`
+  ${({ variant, theme }) =>
+    variant &&
+    css`
+      font-size: ${theme.sizes.toRem(theme.sizes.typography[variant])};
+    `}
+
+  ${({ color, theme }) =>
+    color &&
+    css`
+      color: ${theme.colors[color][700]};
+    `}
+`;
 
 function Typography({
   variant = "body1",
-  component = "p",
+  component,
   color = "default",
   children,
-  className,
+  ...props
 }: TypographyProps) {
-  const Component = useMemo(
-    () => styled(
-      component || (VARIANT_TO_COMPONENT_MAP[variant] as ElementType)
-    )<ComponentPropsWithoutRef<typeof component>>`
-      font-size: ${({ theme }) =>
-        theme.sizes.toRem(theme.sizes.typography[variant])};
-      color: ${({ theme }) => theme.colors[color][700]};
-    `,
-    [color, variant, component]
+  return (
+    <Component
+      variant={variant}
+      color={color}
+      as={component || VARIANT_TO_COMPONENT_MAP[variant]}
+      {...props}
+    >
+      {children}
+    </Component>
   );
-
-  return <Component className={className}>{children}</Component>;
 }
 
 export default Typography;

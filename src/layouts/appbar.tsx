@@ -8,12 +8,8 @@ type AppBarPropTypes = {
 };
 
 const CustomNav = styled.nav`
-  padding: ${({ theme }) => theme.sizes.toRem(16)}
-    ${({ theme }) => theme.sizes.toRem(10)};
-
-  > h1 {
-    color: ${({ theme }) => theme.colors.primary[800]};
-  }
+  padding: ${({ theme }) =>
+    `${theme.sizes.toRem(16)} ${theme.sizes.toRem(10)}`};
 `;
 
 function AppBar({ title }: AppBarPropTypes) {
@@ -21,7 +17,9 @@ function AppBar({ title }: AppBarPropTypes) {
 
   return (
     <CustomNav>
-      <Typography variant="h1"> {title || contextPageTitle} </Typography>
+      <Typography variant="h1" color="primary">
+        {title || contextPageTitle}
+      </Typography>
     </CustomNav>
   );
 }
