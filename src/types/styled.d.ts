@@ -9,7 +9,11 @@ declare module "styled-components" {
         "700": string;
       };
       background: string;
-      button: string;
+      button: {
+        default: string;
+        primary: string;
+        secondry: string;
+      };
       primary: {
         "500": string;
         "600": string;

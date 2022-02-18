@@ -1,23 +1,31 @@
-import { useState, FormEvent } from "react";
+import { FormEvent } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import axios from "axios";
 
 import { API_CONFIG } from "configs/api";
+import useFormState from "hooks/useFormState";
 
 import Grid from "components/Grid";
 import Input from "components/Input";
 import Button from "components/Button";
 
-type ErrorsObjType = {
+type FormStateType = {
   first_name?: string;
   last_name?: string;
   role?: string;
 };
 
-function SubmitEmployeePage({ history }: RouteComponentProps) {
-  const [errors, setErrors] = useState<ErrorsObjType>({});
+const INITIAL_STATE = {
+  first_name: "",
+  last_name: "",
+  role: "",
+};
+const INITIAL_ERRS = {};
 
-  // TODO -> adds validations and request to server to create one employee
+function SubmitEmployeePage({ history }: RouteComponentProps) {
+  const { formValues, formErrors, onChange, setFormErrors } =
+    useFormState<FormStateType>(INITIAL_STATE, INITIAL_ERRS);
+
   const onSubmitEmployeeHandler = (e: FormEvent) => {
     e.preventDefault();
 
@@ -29,15 +37,13 @@ function SubmitEmployeePage({ history }: RouteComponentProps) {
 
     const { first_name, last_name, role } = target;
 
-    const errorsObj: ErrorsObjType = {};
+    const errors: FormStateType = {};
 
-    if (!first_name.value) errorsObj.first_name = "Firstname is required";
-    if (!last_name.value) errorsObj.last_name = "Lastname is required";
-    if (!role.value) errorsObj.role = "Role is required";
+    if (!first_name.value) errors.first_name = "Firstname is required";
+    if (!last_name.value) errors.last_name = "Lastname is required";
+    if (!role.value) errors.role = "Role is required";
 
-    if (Object.keys(errorsObj).length > 0) return setErrors(errorsObj);
-
-    debugger;
+    if (Object.keys(errors).length > 0) return setFormErrors(errors);
 
     axios
       .post(API_CONFIG.record.path, {
@@ -49,7 +55,7 @@ function SubmitEmployeePage({ history }: RouteComponentProps) {
         if (res.status === 201) history.push("/");
       })
       .catch((err) => {
-        if (err.response?.data?.error) setErrors(err.response?.data?.error);
+        if (err.response.data.error) setFormErrors(err.response.data.error);
         else alert(err);
       });
   };
@@ -63,33 +69,41 @@ function SubmitEmployeePage({ history }: RouteComponentProps) {
       onSubmit={onSubmitEmployeeHandler}
     >
       <Input
-        error={Boolean(errors.first_name)}
-        helperText={errors.first_name}
         label="First Name"
         id="first_name"
+        name="first_name"
         placeholder="Matin..."
         color="primary"
+        value={formValues.first_name}
+        onChange={onChange}
+        error={Boolean(formErrors.first_name)}
+        helperText={formErrors.first_name}
       />
       <Input
-        error={Boolean(errors.last_name)}
-        helperText={errors.last_name}
         label="Last Name"
         id="last_name"
+        name="last_name"
         placeholder="Mir..."
         color="primary"
+        value={formValues.last_name}
+        onChange={onChange}
+        error={Boolean(formErrors.last_name)}
+        helperText={formErrors.last_name}
       />
       <Input
-        error={Boolean(errors.role)}
-        helperText={errors.role}
         label="Role"
         id="role"
+        name="role"
         placeholder="Frontend Engineer..."
         color="primary"
+        value={formValues.role}
+        onChange={onChange}
+        error={Boolean(formErrors.role)}
+        helperText={formErrors.role}
       />
 
       <Button variant="filled" color="primary">
-        {" "}
-        Submit{" "}
+        Submit
       </Button>
     </Grid>
   );

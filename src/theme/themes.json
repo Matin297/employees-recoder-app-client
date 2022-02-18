@@ -7,7 +7,11 @@
                 "700": "#dfdbe6"
               },
             "background": "#071C21",
-            "button": "#153B44",
+            "button": {
+                "default": "#153B44",
+                "primary": "#153B44",
+                "secondry": "#153B44"
+            },
             "primary": {
                 "500": "#636f21",
                 "600": "#8b9b2e",
@@ -28,7 +32,11 @@
                 "700": "#343036"
             },
             "background": "#dfdbe6",
-            "button": "#ffffff",
+            "button": {
+                "default": "#ffffff",
+                "primary": "#ffffff",
+                "secondry": "#ffffff"
+            },
             "primary": {
                 "500": "#f7fd04",
                 "600": "#f9b208",

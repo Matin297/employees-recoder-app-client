@@ -1,35 +1,51 @@
-import { 
-    createContext, 
-    ReactNode, 
-    useState, 
-    useMemo, 
-    useContext, 
-    Dispatch, 
-    SetStateAction 
-} from 'react';
+import {
+  createContext,
+  ReactNode,
+  useState,
+  useMemo,
+  useContext,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
-interface PageTitleContextInterface {
-    title: string;
-    setTitle: Dispatch<SetStateAction<string>>;
-}
+type PageTitleContextType = [
+  {
+    pageTitle: string;
+    setPageTitle: Dispatch<SetStateAction<string>>;
+  },
+  () => void
+];
 
-const PageTitleContext = createContext({
-    title: '',
-    setTitle: () => {} 
-} as PageTitleContextInterface);
+const PageTitleContext = createContext<PageTitleContextType>([
+  {
+    pageTitle: "",
+    setPageTitle: (f) => f,
+  },
+  () => undefined,
+]);
 
 type PageTitleProviderProps = {
-    children: ReactNode
-}
+  children: ReactNode;
+};
 
 function PageTitleProvider({ children }: PageTitleProviderProps) {
-    const [title, setTitle] = useState('');
-    const value = useMemo(() => ({
-        title,
-        setTitle
-    }), [title, setTitle]);
+  const [pageTitle, setPageTitle] = useState("");
+  const value: PageTitleContextType = useMemo(
+    () => [
+      {
+        pageTitle,
+        setPageTitle,
+      },
+      () => setPageTitle(""),
+    ],
+    [pageTitle, setPageTitle]
+  );
 
-    return (<PageTitleContext.Provider value={value}>{children}</PageTitleContext.Provider>)
+  return (
+    <PageTitleContext.Provider value={value}>
+      {children}
+    </PageTitleContext.Provider>
+  );
 }
 
 export default PageTitleProvider;

@@ -13,7 +13,7 @@ const CustomNav = styled.nav`
 `;
 
 function AppBar({ title }: AppBarPropTypes) {
-  const { title: contextPageTitle } = usePageTitle();
+  const [{ pageTitle: contextPageTitle }] = usePageTitle();
 
   return (
     <CustomNav>
